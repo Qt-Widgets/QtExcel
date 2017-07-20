@@ -63,71 +63,7 @@
       <property name="title">
        <string>范围(Range)</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton_Range_SetHAlign">
-         <property name="text">
-          <string>设置范围水平对齐方式</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_Range_SetVAlign">
-         <property name="text">
-          <string>设置范围垂直对齐方式</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="pushButton_Range_SetWrapText">
-         <property name="text">
-          <string>设置范围字符自动换行</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton_Range_SetMergeCells">
-         <property name="text">
-          <string>设置范围合并单元格</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>设置范围字体是否为上标</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>设置范围字体是否加粗</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>设置范围字体是否为下标</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="text">
-          <string>设置范围字体是否有下划线</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>设置范围字体是否有中划线</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QGridLayout" name="gridLayout_6"/>
      </widget>
     </item>
     <item row="1" column="1">
@@ -135,43 +71,7 @@
       <property name="title">
        <string>列(Columns)</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton_setColumnWidth">
-         <property name="text">
-          <string>设置列宽</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton_Columns_SetVAglin">
-         <property name="text">
-          <string>设置列垂直对齐方式</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_Columns_SetHAlign">
-         <property name="text">
-          <string>设置列水平对齐方式</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="pushButton_Columns_SetMergeCells">
-         <property name="text">
-          <string>设置列合并单元格</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="pushButton_Columns_SetWrapText">
-         <property name="text">
-          <string>设置列自动换行</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QGridLayout" name="gridLayout_5"/>
      </widget>
     </item>
     <item row="2" column="0">
@@ -186,50 +86,7 @@
       <property name="title">
        <string>行(Rows)</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_Rows_SetHAlign">
-         <property name="text">
-          <string>设置行水平对齐方式</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton_Rows_SetHeight">
-         <property name="text">
-          <string>设置行高</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton_Rows_SetVAlign">
-         <property name="text">
-          <string>设置行垂直对齐方式</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="pushButton_Rows_SetMergeCells">
-         <property name="text">
-          <string>设置行合并单元格</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="pushButton_Rows_SetWrapText">
-         <property name="text">
-          <string>设置行自动换行</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QGroupBox" name="groupBox_Cells">
-      <property name="title">
-       <string>单元格(Cell)</string>
-      </property>
+      <layout class="QGridLayout" name="gridLayout_4"/>
      </widget>
     </item>
     <item row="0" column="0">
@@ -288,6 +145,13 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="3" column="1">
+     <widget class="QGroupBox" name="groupBox_Cells">
+      <property name="title">
+       <string>单元格(Cell)</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
