@@ -8,51 +8,69 @@ SExcel::SExcel(QObject *parent) :
 {
     mExcelApp = NULL;
     mWorkBooks = NULL;
-    mWorkBooksCount = 0;
     mActiveWorkBook = NULL;
     mActiveWorkSheet = NULL;
     mIsVisible = true;
-    mIsAppExecuted = false;
+    mIsExecuted = false;
 
     mIsValid = initCOM();
 }
 
 SExcel::~SExcel()
 {
-    if (mIsAppExecuted) {
-        quitApp();
+    if (mIsExecuted) {
+        quit();
     }
 }
 
 void SExcel::saveAsXLS(const QString &filePath)
 {
+    if (!mIsExecuted)
+        return;
+
     mActiveWorkBook->dynamicCall("SaveAs(const QString &, int, const QString &, const QString &, bool, bool)",
                                   QDir::toNativeSeparators(filePath), 56, "", "", false, false);
 }
 
 void SExcel::saveAsXLSX(const QString &filePath)
 {
+    if (!mIsExecuted)
+        return;
+
     mActiveWorkBook->dynamicCall("SaveAs(const QString &, int, const QString &, const QString &, bool, bool)",
                                  QDir::toNativeSeparators(filePath), 51, "", "", false, false);
 }
 
 void SExcel::open(const QString &filePath)
 {
-    mWorkBooks->dynamicCall("Open(const QString &)", filePath);
-    ++ mWorkBooksCount;
+    if (!mIsExecuted)
+        return;
 
+    mWorkBooks->dynamicCall("Open(const QString &)", filePath);
     mActiveWorkBook = mExcelApp->querySubObject("ActiveWorkBook");
     mActiveWorkSheet = mActiveWorkBook->querySubObject("WorkSheets(int)", 1);
 }
 
 void SExcel::save()
 {
+    if (!mIsExecuted)
+        return;
+
     mActiveWorkBook->dynamicCall("Save()");
 }
 
-bool SExcel::executeApp()
+int SExcel::workSheetsCount()
 {
-    if (mIsAppExecuted)
+    if (!mIsExecuted)
+        return 0;
+
+    QAxObject *workSheets = mActiveWorkBook->querySubObject("WorkSheets");
+    return workSheets->property("Count").toInt();
+}
+
+bool SExcel::execute()
+{
+    if (mIsExecuted)
         return true;
 
     // ´ò¿ªexcel³ÌÐò
@@ -66,22 +84,36 @@ bool SExcel::executeApp()
     //
     mExcelApp->setProperty("Visible", mIsVisible);
     mWorkBooks = mExcelApp->querySubObject("WorkBooks");
-    mIsAppExecuted = true;
+    mIsExecuted = true;
 
     return true;
 }
 
-void SExcel::quitApp()
+void SExcel::quit()
 {
-    if (mIsAppExecuted) {
+    if (mIsExecuted) {
         mExcelApp->dynamicCall("Quit(void)");
         deleteAxObjects();
-        mIsAppExecuted = false;
+        mIsExecuted = false;
     }
+}
+
+int SExcel::workBooksCount()
+{
+    if (!mIsExecuted)
+        return 0;
+
+    if (mWorkBooks)
+        return mWorkBooks->property("Count").toInt();
+    else
+        return 0;
 }
 
 void SExcel::newWorkBook()
 {
+    if (!mIsExecuted)
+        return;
+
     mWorkBooks->dynamicCall("Add");
     mActiveWorkBook = mExcelApp->querySubObject("ActiveWorkBook");
     mActiveWorkSheet = mActiveWorkBook->querySubObject("WorkSheets(int)", 1);
@@ -89,6 +121,9 @@ void SExcel::newWorkBook()
 
 void SExcel::closeWorkBooks()
 {
+    if (!mIsExecuted)
+        return;
+
     mWorkBooks->dynamicCall("Close");
 }
 
@@ -116,6 +151,14 @@ QAxObject *SExcel::getRange(const int startRow, const int startColumn,
     return getRange(rangeName);
 }
 
+void SExcel::setRangeProperty(const int startRow, const int startColumn, const int endRow, const int endColumn, const QString &propertyName, const QVariant &propertyValue)
+{
+    QAxObject *obj = getRange(startRow, startColumn, endRow, endColumn);
+    QByteArray arrayPropertyName = propertyName.toLocal8Bit();
+    obj->setProperty(arrayPropertyName.constData(), propertyValue);
+    delete obj;
+}
+
 QAxObject *SExcel::getRows(const QString &name)
 {
     return mActiveWorkSheet->querySubObject("Rows(const QString &)", name);
@@ -126,6 +169,74 @@ QAxObject *SExcel::getRows(const int startRow, const int endRow)
     return getRows(
                 QString("%1:%2").arg(startRow).arg(endRow)
                 );
+}
+
+void SExcel::setRangeHAlignment(const int startRow, const int startColumn, const int endRow, const int endColumn, SExcel::HAlignment align)
+{
+    setRangeProperty(startRow, startColumn, endRow, endColumn, "HorizontalAlignment", align);
+}
+
+void SExcel::setRangeVAlignment(const int startRow, const int startColumn, const int endRow, const int endColumn, SExcel::VAlignment align)
+{
+    setRangeProperty(startRow, startColumn, endRow, endColumn, "VerticalAlignment", align);
+}
+
+void SExcel::setRangeMergeCells(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeProperty(startRow, startColumn, endRow, endColumn, "MergeCells", b);
+}
+
+void SExcel::setRangeWrapText(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeProperty(startRow, startColumn, endRow, endColumn, "WrapText", b);
+}
+
+void SExcel::setRangeFontProperty(const int startRow, const int startColumn, const int endRow, const int endColumn, const QString &propertyName, const QVariant &propertyValue)
+{
+    QAxObject *range = getRange(startRow, startColumn, endRow, endColumn);
+    QAxObject *font = range->querySubObject("Font");
+    QByteArray arrayPropertyName = propertyName.toLocal8Bit();
+    font->setProperty(arrayPropertyName.constData(), propertyValue);
+    delete font;
+    delete range;
+}
+
+void SExcel::setRangeFontBold(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeFontProperty(startRow, startColumn, endRow, endColumn, "Bold", b);
+}
+
+void SExcel::setRangeFontUnderline(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeFontProperty(startRow, startColumn, endRow, endColumn, "Underline", b);
+}
+
+void SExcel::setRangeFontSize(const int startRow, const int startColumn, const int endRow, const int endColumn, const int size)
+{
+    setRangeFontProperty(startRow, startColumn, endRow, endColumn, "Size", size);
+}
+
+void SExcel::setRangeFontStrikethrough(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeFontProperty(startRow, startColumn, endRow, endColumn, "Strikethrough", b);
+}
+
+void SExcel::setRangeFontSuperscript(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeFontProperty(startRow, startColumn, endRow, endColumn, "Superscript", b);
+}
+
+void SExcel::setRangeFontSubscript(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
+{
+    setRangeFontProperty(startRow, startColumn, endRow, endColumn, "Subscript", b);
+}
+
+void SExcel::setRowsProperty(const int startRow, const int endRow, const QString &propertyName, const QVariant &propertyValue)
+{
+    QAxObject *obj = getRows(startRow, endRow);
+    QByteArray arrayPropertyName = propertyName.toLocal8Bit();
+    obj->setProperty(arrayPropertyName.constData(), propertyValue);
+    delete obj;
 }
 
 QAxObject *SExcel::getColumns(const QString &name)
@@ -140,46 +251,62 @@ QAxObject *SExcel::getColumns(const int startColumn, const int endColumn)
                 );
 }
 
-void SExcel::setRowsHeight(const int startRow, const int endRow, const float height)
+void SExcel::setColumnsProperty(const int startColumn, const int endColumn, const QString &propertyName, const QVariant &propertyValue)
 {
-    QAxObject *obj = getRows(startRow, endRow);
-    obj->setProperty("RowHeight", height);
-    delete obj;
-}
-
-void SExcel::setRowsHAlignment(const int startRow, const int endRow, SExcel::HAlignment align)
-{
-    QAxObject *obj = getRows(startRow, endRow);
-    obj->setProperty("HorizontalAlignment", align);
-    delete obj;
-}
-
-void SExcel::setRowsVAlignment(const int startRow, const int endRow, SExcel::VAlignment align)
-{
-    QAxObject *obj = getRows(startRow, endRow);
-    obj->setProperty("VerticalAlignment", align);
+    QAxObject *obj = getColumns(startColumn, endColumn);
+    QByteArray arrayPropertyName = propertyName.toLocal8Bit();
+    obj->setProperty(arrayPropertyName.constData(), propertyValue);
     delete obj;
 }
 
 void SExcel::setColumnsWidth(const int startColumn, const int endColumn, const float width)
 {
-    QAxObject *obj = getColumns(startColumn, endColumn);
-    obj->setProperty("ColumnWidth", width);
-    delete obj;
+    setColumnsProperty(startColumn, endColumn, "ColumnWidth", width);
 }
 
 void SExcel::setColumnsHAlignment(const int startColumn, const int endColumn, SExcel::HAlignment align)
 {
-    QAxObject *obj = getColumns(startColumn, endColumn);
-    obj->setProperty("HorizontalAlignment", align);
-    delete obj;
+    setColumnsProperty(startColumn, endColumn, "HorizontalAlignment", align);
 }
 
 void SExcel::setColumnsVAlignment(const int startColumn, const int endColumn, SExcel::VAlignment align)
 {
-    QAxObject *obj = getColumns(startColumn, endColumn);
-    obj->setProperty("VerticalAlignment", align);
-    delete obj;
+    setColumnsProperty(startColumn, endColumn, "VerticalAlignment", align);
+}
+
+void SExcel::setColumnsMergeCells(const int startColumn, const int endColumn, bool b)
+{
+    setColumnsProperty(startColumn, endColumn, "MergeCells", b);
+}
+
+void SExcel::setColumnsWrapText(const int startColumn, const int endColumn, bool b)
+{
+    setColumnsProperty(startColumn, endColumn, "WrapText", b);
+}
+
+void SExcel::setRowsHeight(const int startRow, const int endRow, const float height)
+{
+    setRowsProperty(startRow, endRow, "RowHeight", height);
+}
+
+void SExcel::setRowsHAlignment(const int startRow, const int endRow, SExcel::HAlignment align)
+{
+    setRowsProperty(startRow, endRow, "HorizontalAlignment", align);
+}
+
+void SExcel::setRowsVAlignment(const int startRow, const int endRow, SExcel::VAlignment align)
+{
+    setRowsProperty(startRow, endRow, "VerticalAlignment", align);
+}
+
+void SExcel::setRowsMergeCells(const int startRow, const int endRow, bool b)
+{
+    setRowsProperty(startRow, endRow, "MergeCells", b);
+}
+
+void SExcel::setRowsWrapText(const int startRow, const int endRow, bool b)
+{
+    setRowsProperty(startRow, endRow, "WrapText", b);
 }
 
 QAxObject *SExcel::getCell(const int row, const int column)
@@ -187,39 +314,17 @@ QAxObject *SExcel::getCell(const int row, const int column)
     return mActiveWorkSheet->querySubObject("Cells(int,int)", row, column);
 }
 
+void SExcel::setCellProperty(const int row, const int column, const QString &propertyName, const QVariant &propertyValue)
+{
+    QAxObject *obj = getCell(row, column);
+    QByteArray arrayPropertyName = propertyName.toLocal8Bit();
+    obj->setProperty(arrayPropertyName.constData(), propertyValue);
+    delete obj;
+}
+
 void SExcel::setCellText(const int row, const int column, const QString &text)
 {
-    QAxObject *cell = getCell(row, column);
-    cell->dynamicCall("SetValue(const QString &)", text);
-    delete cell;
-}
-
-void SExcel::setRangeHAlignment(const int startRow, const int startColumn, const int endRow, const int endColumn, SExcel::HAlignment align)
-{
-    QAxObject *obj = getRange(startRow, startColumn, endRow, endColumn);
-    obj->setProperty("HorizontalAlignment", align);
-    delete obj;
-}
-
-void SExcel::setRangeVAlignment(const int startRow, const int startColumn, const int endRow, const int endColumn, SExcel::VAlignment align)
-{
-    QAxObject *obj = getRange(startRow, startColumn, endRow, endColumn);
-    obj->setProperty("VerticalAlignment", align);
-    delete obj;
-}
-
-void SExcel::setRangeMergeCells(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
-{
-    QAxObject *obj = getRange(startRow, startColumn, endRow, endColumn);
-    obj->setProperty("MergeCells", b);
-    delete obj;
-}
-
-void SExcel::setRangeWrapText(const int startRow, const int startColumn, const int endRow, const int endColumn, const bool b)
-{
-    QAxObject *obj = getRange(startRow, startColumn, endRow, endColumn);
-    obj->setProperty("WrapText", b);
-    delete obj;
+    setCellProperty(row, column, "Value", text);
 }
 
 bool SExcel::initCOM()

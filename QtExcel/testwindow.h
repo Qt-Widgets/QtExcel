@@ -18,36 +18,42 @@ public:
     ~TestWindow();
 
 private slots:
+    void on_pushButton_debugTest_clicked();
     void on_pushButton_openWorkDirectory_clicked();
 
-    void on_pushButton_openExcelApp_clicked();
+    void on_pushButton_ExcelApp_Execute_clicked();
+    void on_pushButton_ExcelApp_Quit_clicked();
+    void on_pushButton_ExcelApp_SetVisible_clicked();
 
-    void on_pushButton_newWorkBook_clicked();
+    void on_pushButton_WorkBooks_OpenFile_clicked();
+    void on_pushButton_WorkBooks_NewWorkBook_clicked();
+    void on_pushButton_WorkBooks_CloseAll_clicked();
 
-    void on_pushButton_openExcelFile_clicked();
+    void on_pushButton_Range_SetHAlign_clicked();
+    void on_pushButton_Range_SetVAlign_clicked();
+    void on_pushButton_Range_SetMergeCells_clicked();
+    void on_pushButton_Range_SetWrapText_clicked();
 
-    void on_pushButton_closeExcelApp_clicked();
-
-    void on_pushButton_closeWorkBook_clicked();
-
-    void on_pushButton_setRowHeight_clicked();
+    void on_pushButton_Rows_SetHeight_clicked();
+    void on_pushButton_Rows_SetHAlign_clicked();
+    void on_pushButton_Rows_SetVAlign_clicked();
+    void on_pushButton_Rows_SetMergeCells_clicked();
+    void on_pushButton_Rows_SetWrapText_clicked();
 
     void on_pushButton_setColumnWidth_clicked();
 
-    void on_pushButton_setRangeHAlign_clicked();
+    void on_pushButton_Columns_SetHAlign_clicked();
+    void on_pushButton_Columns_SetVAglin_clicked();
+    void on_pushButton_Columns_SetMergeCells_clicked();
+    void on_pushButton_Columns_SetWrapText_clicked();
 
-    void on_pushButton_setRangeVAlign_clicked();
 
-    void on_pushButton_setRangeMergeCells_clicked();
-
-    void on_pushButton_setRangeWrapText_clicked();
-
-    void on_pushButton_setRowsHAlign_clicked();
 
 private:
     Ui::TestWindow *ui;
 
     SExcel *mExcel;
+
 };
 
 #endif // TESTWINDOW_H

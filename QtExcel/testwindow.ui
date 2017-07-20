@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>449</width>
-    <height>366</height>
+    <width>712</width>
+    <height>751</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,96 +15,279 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="4" column="0">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox_WorkBooks">
+      <property name="title">
+       <string>工作簿(WorkBooks)</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_WorkBooks_CloseAll">
+         <property name="text">
+          <string>关闭所有工作簿</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_WorkBooks_NewWorkBook">
+         <property name="text">
+          <string>新建工作簿</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_WorkBooks_OpenFile">
+         <property name="text">
+          <string>打开文件</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QGroupBox" name="groupBox_Range">
+      <property name="title">
+       <string>范围(Range)</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_Range_SetHAlign">
+         <property name="text">
+          <string>设置范围水平对齐方式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Range_SetVAlign">
+         <property name="text">
+          <string>设置范围垂直对齐方式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_Range_SetWrapText">
+         <property name="text">
+          <string>设置范围字符自动换行</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_Range_SetMergeCells">
+         <property name="text">
+          <string>设置范围合并单元格</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>设置范围字体是否为上标</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>设置范围字体是否加粗</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>设置范围字体是否为下标</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="text">
+          <string>设置范围字体是否有下划线</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="text">
+          <string>设置范围字体是否有中划线</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="groupBox_Cloumns">
+      <property name="title">
+       <string>列(Columns)</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_setColumnWidth">
+         <property name="text">
+          <string>设置列宽</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_Columns_SetVAglin">
+         <property name="text">
+          <string>设置列垂直对齐方式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Columns_SetHAlign">
+         <property name="text">
+          <string>设置列水平对齐方式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_Columns_SetMergeCells">
+         <property name="text">
+          <string>设置列合并单元格</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_Columns_SetWrapText">
+         <property name="text">
+          <string>设置列自动换行</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="2" column="0">
-     <widget class="QPushButton" name="pushButton_closeExcelApp">
-      <property name="text">
-       <string>关闭Excel应用程序</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QPushButton" name="pushButton_setRangeWrapText">
-      <property name="text">
-       <string>设置范围字符自动换行</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QPushButton" name="pushButton_setRangeMergeCells">
-      <property name="text">
-       <string>设置范围合并单元格</string>
+     <widget class="QGroupBox" name="groupBox_WorkSheets">
+      <property name="title">
+       <string>工作表(WorkSheets)</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_setRowHeight">
-      <property name="text">
-       <string>设置行高</string>
+     <widget class="QGroupBox" name="groupBox_Rows">
+      <property name="title">
+       <string>行(Rows)</string>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_setColumnWidth">
-      <property name="text">
-       <string>设置列宽</string>
-      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Rows_SetHAlign">
+         <property name="text">
+          <string>设置行水平对齐方式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_Rows_SetHeight">
+         <property name="text">
+          <string>设置行高</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_Rows_SetVAlign">
+         <property name="text">
+          <string>设置行垂直对齐方式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_Rows_SetMergeCells">
+         <property name="text">
+          <string>设置行合并单元格</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_Rows_SetWrapText">
+         <property name="text">
+          <string>设置行自动换行</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton_setRangeHAlign">
-      <property name="text">
-       <string>设置范围水平对齐方式</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="pushButton_setRangeVAlign">
-      <property name="text">
-       <string>设置范围垂直对齐方式</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_openExcelApp">
-      <property name="text">
-       <string>打开Excel应用程序</string>
+     <widget class="QGroupBox" name="groupBox_Cells">
+      <property name="title">
+       <string>单元格(Cell)</string>
       </property>
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_openWorkDirectory">
-      <property name="text">
-       <string>打开程序运行目录</string>
+     <widget class="QGroupBox" name="groupBox_ExcelApp">
+      <property name="title">
+       <string>应用(Excel.Application)</string>
       </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_ExcelApp_Quit">
+         <property name="text">
+          <string>关闭Excel应用程序</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_openWorkDirectory">
+         <property name="text">
+          <string>打开程序运行目录</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_ExcelApp_Execute">
+         <property name="text">
+          <string>打开Excel应用程序</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_ExcelApp_SetVisible">
+         <property name="text">
+          <string>设置Excel应用程序可见性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_debugTest">
+         <property name="text">
+          <string>输出测试</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="6" column="0">
-     <widget class="QPushButton" name="pushButton_closeWorkBook">
-      <property name="text">
-       <string>关闭所有工作簿</string>
+    <item row="1" column="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="pushButton_newWorkBook">
-      <property name="text">
-       <string>新建工作簿</string>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
       </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="pushButton_openExcelFile">
-      <property name="text">
-       <string>打开文件</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QPushButton" name="pushButton_setRowsHAlign">
-      <property name="text">
-       <string>设置行水平对齐方式</string>
-      </property>
-     </widget>
+     </spacer>
     </item>
    </layout>
   </widget>
@@ -113,7 +296,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>449</width>
+     <width>712</width>
      <height>22</height>
     </rect>
    </property>
