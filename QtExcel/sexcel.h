@@ -27,39 +27,17 @@
 #include <QObject>
 #include <QAxObject>
 
-class Rows {
-public:
-    Rows(const int begin, const int end) {
-        this->begin = begin;
-        this->end = end;
-    }
-    int begin;
-    int end;
-};
-
-class Columns {
-public:
-    Columns(const int begin, const int end) {
-        this->begin = begin;
-        this->end = end;
-    }
-    int begin;
-    int end;
-};
-
-class Range {
-public:
-    Range(const int beginRow, const int beginColumn, const int endRow, const int endColumn) {
-        this->beginRow = beginRow;
-        this->beginColumn = beginColumn;
-        this->endRow = endRow;
-        this->endColumn = endColumn;
-    }
-    int beginRow;
-    int beginColumn;
-    int endRow;
-    int endColumn;
-};
+/*
+HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+        */
 
 class SExcel : public QObject
 {
@@ -88,14 +66,16 @@ public:
     ///
     bool execute();                                             /* 运行Excel应用程序 */
     void quit();                                                   /* 关闭Excel应用程序 */
-    inline bool isVisible() const { return mIsVisible; }    /* 获取Excel应用程序窗口是否可见 */
-    inline void setVisible(const bool b) { mIsVisible = b; mExcelApp->setProperty("Visible", mIsVisible); } /* 设置Excel应用程序窗口是否可见 */
-    inline QString errorString() const { return mErrorString; }     /* 获取Excel应用程序的错误描述 */
-    inline bool isExecuted() const { return mIsExecuted; }          /* 获取Excel应用程序是否已经启动 */
+    bool isVisible() const { return mIsVisible; }    /* 获取Excel应用程序窗口是否可见 */
+    void setVisible(const bool b);                           /* 设置Excel应用程序窗口是否可见 */
+    QString errorString() const { return mErrorString; }     /* 获取Excel应用程序的错误描述 */
+    bool isExecuted() const { return mIsExecuted; }          /* 获取Excel应用程序是否已经启动 */
 
     ///
     /// 工作簿对象
     ///
+    void setActiveWorkBookProperty(const QString &propertyName, const QVariant &propertyValue);
+    void setActiveWorkBook(const int index);          /* 设置活动工作簿 */
     int workBooksCount();                                       /* 打开的工作簿的总数 */
     void newWorkBook();                                         /* 新建工作簿,新建的工作簿被激活,成为活动工作簿 */
     void closeWorkBooks();                                      /* 关闭所有工作簿 */
@@ -107,10 +87,10 @@ public:
     ///
     /// 工作表对象
     ///
+    void setActiveWorkSheetProperty(const QString &propertyName, const QVariant &value);
     void setActiveWorkSheet(const int index);                                     /* 设置活动工作表 */
     int workSheetsCount();                                                                  /* 获取活动工作簿中的工作表总数 */
-    void setActiveWorkSheetName(const QString &name);                   /* 设置活动工作表的名称 */
-    void setWorkSheetName(const int index, const QString &name);    /* 设置活动工作簿中第index个工作表的名称 */
+    void newWorkSheet();                                                                    /* 新建一个工作表 */
 
     ///
     /// 范围对象,包含一定范围内的所有单元格
@@ -140,6 +120,9 @@ public:
     static QString getColumnsName(const int startColumn, const int endColumn);
     QAxObject *getColumns(const QString &name);
     QAxObject *getColumns(const int startColumn, const int endColumn);
+    QVariant getColumnsProperty(const QString &columnsName, const QString &propertyName);
+    QVariant getColumnsProperty(const int startColumn, const int endColumn, const QString &propertyName);
+    void setColumnsProperty(const QString &columnsName, const QString &propertyName, const QVariant &propertyValue);
     void setColumnsProperty(const int startColumn, const int endColumn, const QString &propertyName, const QVariant &propertyValue);
 
     ///
@@ -147,10 +130,7 @@ public:
     ///
     QAxObject *getCell(const int row, const int column);
     void setCellProperty(const int row, const int column, const QString &propertyName, const QVariant &propertyValue);
-    void setCellText(const int row, const int column, const QString &text);
-
     QVariant getCellProperty(const int row, const int column, const QString &propertyName);
-    QVariant getCellValue(const int row, const int column);
 
 protected:
     bool initCOM();                             /* 初始化windows COM组件 */

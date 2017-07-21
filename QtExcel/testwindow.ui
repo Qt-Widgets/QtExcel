@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>712</width>
-    <height>751</height>
+    <width>462</width>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,80 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="0">
-     <widget class="QGroupBox" name="groupBox_WorkBooks">
-      <property name="title">
-       <string>工作簿(WorkBooks)</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton_WorkBooks_CloseAll">
-         <property name="text">
-          <string>关闭所有工作簿</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_WorkBooks_NewWorkBook">
-         <property name="text">
-          <string>新建工作簿</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton_WorkBooks_OpenFile">
-         <property name="text">
-          <string>打开文件</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QGroupBox" name="groupBox_Range">
-      <property name="title">
-       <string>范围(Range)</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_6"/>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QGroupBox" name="groupBox_Cloumns">
-      <property name="title">
-       <string>列(Columns)</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_5"/>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QGroupBox" name="groupBox_WorkSheets">
-      <property name="title">
-       <string>工作表(WorkSheets)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QGroupBox" name="groupBox_Rows">
-      <property name="title">
-       <string>行(Rows)</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_4"/>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox_ExcelApp">
       <property name="title">
@@ -133,24 +59,235 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer">
+    <item row="14" column="0">
+     <spacer name="verticalSpacer">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Vertical</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>40</width>
-        <height>20</height>
+        <width>20</width>
+        <height>40</height>
        </size>
       </property>
      </spacer>
     </item>
-    <item row="3" column="1">
-     <widget class="QGroupBox" name="groupBox_Cells">
+    <item row="0" column="1" rowspan="3">
+     <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>单元格(Cell)</string>
+       <string>设置/获取对象属性测试</string>
       </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="4" column="0" colspan="2">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>范围/行/列 的名称:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0" colspan="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>属性值:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_Cell_SetProperty">
+         <property name="text">
+          <string>设置 单元格 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QRadioButton" name="radioButton_integer">
+         <property name="text">
+          <string>整型类型</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_Columns_SetProperty">
+         <property name="text">
+          <string>设置 列 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="2">
+        <widget class="QLineEdit" name="lineEdit_propertyName"/>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QLineEdit" name="lineEdit_rangeName"/>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>属性名称:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QComboBox" name="comboBox_propertyValue">
+         <item>
+          <property name="text">
+           <string>FALSE</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>TRUE</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QSpinBox" name="spinBox_properyValue">
+         <property name="maximum">
+          <number>1111111111</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QRadioButton" name="radioButton_text">
+         <property name="text">
+          <string>字符类型</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="QLineEdit" name="lineEdit_propertyValue"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_Range_GetProperty">
+         <property name="text">
+          <string>获取 范围 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QPushButton" name="pushButton_Cell_GetProperty">
+         <property name="text">
+          <string>获取 单元格 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_Rows_GetProperty">
+         <property name="text">
+          <string>获取 行 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="pushButton_Columns_GetProperty">
+         <property name="text">
+          <string>获取 列 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_Range_SetProperty">
+         <property name="text">
+          <string>设置 范围 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QRadioButton" name="radioButton_bool">
+         <property name="text">
+          <string>布尔类型</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Rows_SetProperty">
+         <property name="text">
+          <string>设置 行 属性</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>单元格的行:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="spinBox_cellRow"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>单元格的列:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="spinBox_cellColumn"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QGroupBox" name="groupBox_WorkBooks">
+      <property name="title">
+       <string>工作簿(WorkBooks)</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_WorkBooks_NewWorkBook">
+         <property name="text">
+          <string>新建工作簿</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_WorkBooks_CloseAll">
+         <property name="text">
+          <string>关闭所有工作簿</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_WorkBooks_OpenFile">
+         <property name="text">
+          <string>打开文件</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLineEdit" name="lineEdit_index"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_setActiveWorkSheet">
+         <property name="text">
+          <string>选择第?个工作表</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_setActiveWorkBook">
+         <property name="text">
+          <string>选择第?个工作簿</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QPushButton" name="pushButton_newWorkSheet">
+         <property name="text">
+          <string>新建工作表</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
@@ -160,7 +297,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>712</width>
+     <width>462</width>
      <height>22</height>
     </rect>
    </property>
