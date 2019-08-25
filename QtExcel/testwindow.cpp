@@ -7,6 +7,7 @@
 #include <QDir>
 #include "sexcel.h"
 #include <QFileDialog>
+#include <QButtonGroup>
 
 
 bool gWrapText = true;
